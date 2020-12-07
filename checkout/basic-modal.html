@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic SDK Demo</title>
+    <script src="https://sdk.staging.internal.abowire.com/abowire.min.js"></script>
+  </head>
+  <body>
+    <button class="plan-button" data-plan="premium">
+      Choose the Premium plan
+    </button>
+    <button class="plan-button" data-plan="scale">Choose the Scale plan</button>
+    <button class="plan-button" data-plan="enterprise">
+      Choose the Enterprise plan
+    </button>
+
+    <script>
+      abowire.config.changeConfig({
+        clientId: USE_YOUR_OWN_CLIENT_ID_HERE,
+        environment: "sandbox",
+      });
+
+      const buttons = document.getElementsByClassName("plan-button");
+
+      for (let button of buttons) {
+        const sku = button.getAttribute("data-plan");
+
+        button.addEventListener("click", () => {
+          abowire.cart.addItem({ sku });
+          abowire.cart.openCart();
+        });
+      }
+    </script>
+  </body>
+</html>
